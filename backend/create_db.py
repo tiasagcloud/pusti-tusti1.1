@@ -1,3 +1,6 @@
+# THIS FILE IS NOT NEEDED INSTEAD USE setup_student_system.py
+
+
 import sqlite3
 
 conn = sqlite3.connect("student.db")
