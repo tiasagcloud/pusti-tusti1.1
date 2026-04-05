@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Face Scan</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <h1>Face Scan</h1>
+
+    <div class="card">
+        <input id="student_id" placeholder="Enter Student ID (for now)">
+        <br><br>
+
+        <button onclick="scanFace()">Scan Face</button>
+        <button onclick="go('verify.html')">Back</button>
+    </div>
+</div>
+
+<script src="script.js">
+fetch("http://127.0.0.1:5000/scan_face", {
+    method: "POST",
+</script>
+</body>
+</html>

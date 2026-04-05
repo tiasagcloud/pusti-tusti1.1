@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Students</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+
+    <h1>Student Information</h1>
+
+    <div class="card">
+        <table border="1" width="100%" id="studentTable">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Class</th>
+            </tr>
+        </table>
+
+        <br>
+        <button onclick="go('home.html')">Home</button>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+<script>
+fetch("http://127.0.0.1:5000/get_students")
+.then(res => res.json())
+.then(data => {
+    let table = document.getElementById("studentTable");
+
+    data.forEach(s => {
+        table.innerHTML += `
+        <tr>
+            <td>${s.id}</td>
+            <td>${s.name}</td>
+            <td>${s.class}</td>
+        </tr>`;
+    });
+});
+</script>
+
+</body>
+</html>

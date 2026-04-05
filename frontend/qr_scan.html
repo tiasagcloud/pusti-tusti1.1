@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>QR Scan</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Scan QR Code</h1>
+
+    <div class="card">
+        <div id="reader" style="width:300px;"></div>
+
+        <br>
+        <button onclick="go('verify.html')">Back</button>
+    </div>
+</div>
+
+<script src="https://unpkg.com/html5-qrcode"></script>
+
+<script>
+function go(page){
+    window.location.href = page;
+}
+
+function onScanSuccess(decodedText) {
+
+    fetch("http://127.0.0.1:5000/scan_qr", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({ student_id: decodedText })
+    })
+    .then(res => res.json())
+    .then(data => {
+        localStorage.setItem("data", JSON.stringify(data));
+        localStorage.setItem("mode", "qr");
+        window.location.href = "result.html";
+    });
+}
+
+let html5QrCode = new Html5Qrcode("reader");
+
+Html5Qrcode.getCameras().then(devices => {
+    if (devices.length) {
+        html5QrCode.start(
+            devices[0].id,
+            { fps: 10, qrbox: 250 },
+            onScanSuccess
+        );
+    }
+});
+</script>
+
+</body>
+</html>
